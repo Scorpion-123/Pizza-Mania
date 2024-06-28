@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pizza - Mania</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+  <body>
+
+        {% comment %} This is used to display the messages that is been sent by the backend. {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+          
+                <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
+                <b><strong style="text-transform: capitalize;">{{ message.tags }}</strong></b> | {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <b><span aria-hidden="true">&times;</span></b>
+                </button>
+                </div>
+
+            {% endfor%}
+        {% endif %}
+    
+    <section class="vh-100" style="background-color: #9A616D;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class="col-md-6 col-lg-5 d-none d-md-block">
+                    <img src="https://freedesignfile.com/upload/2023/04/Pizza-chef-vector.jpg"
+                      alt="login form" class="img-fluid py-4 my-5" style="border-radius: 1rem 0 0 1rem;" />
+                  </div>
+                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+      
+                      <form aaction="/login/" method="post">
+                        {% csrf_token %}
+      
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                          <i class="fa-solid fa-pizza-slice fa-2x me-3" style="color: #ff6219;"></i>
+                          <span class="h1 fw-bold mb-0">Pizza <span style="color: orange;">Mania</span></span>
+                        </div>
+      
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+      
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <input type="username" id="form2Example17" name="username" class="form-control form-control-lg" required/>
+                          <label class="form-label" for="form2Example17">User<span style="color: orange;">name</span></label>
+                        </div>
+
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="email" id="form2Example27" name="email" class="form-control form-control-lg" required/>
+                            <label class="form-label" for="form2Example17">Ema<span style="color: orange;">il</span></label>
+                          </div>
+      
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <div class="d-flex ">
+                                <input type="password" id="password" name="password" class="form-control form-control-lg" required/>
+                                <button type="button" id="passwordToggle" class="btn-warning rounded px-3">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+
+                          <label class="form-label" for="form2Example27">Pass<span style="color: orange;">word</span></label>
+                        </div>
+      
+                        <div class="pt-1 mb-4">
+                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block px-4" type="submit">Log<span style="color: orange;">in</span></button>
+                        </div>
+
+                          <!-- Register buttons -->
+                          <div class="text-center">
+                            <p>or sign up with:</p>
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                <span style="color: orange;"> <i class="fab fa-facebook-f"></i> </span>
+                            </button>
+          
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                <span style="color: black;"> <i class="fab fa-google"></i> </span>
+                            </button>
+          
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                <span style="color: orange;"> <i class="fab fa-twitter"></i> </span>
+                            </button>
+          
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                <span style="color: black;"> <i class="fab fa-github"></i> </span>
+                            </button>
+                          </div>
+      
+                      </form>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+            
+        const passwordToggle = document.querySelector('#passwordToggle');
+
+        passwordToggle.addEventListener('click', (event) => {
+            
+            var inputField = document.getElementById("password");
+
+            if (inputField.type == "password") {
+                inputField.type = "text";
+            }
+            else {
+                inputField.type = "password";
+            }
+        });
+
+      </script>
+    
+  </body>
+</html>

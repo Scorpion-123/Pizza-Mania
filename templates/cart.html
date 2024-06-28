@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pizza - Mania</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+    <link rel="stylesheet" href="{% static "css/cart.css" %}">
+
+
+  </head>
+  <body>
+    
+
+    {% comment %} This is used to display the messages that is been sent by the backend. {% endcomment %}
+    {% if messages %}
+      {% for message in messages %}
+          
+          <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
+            <b><strong style="text-transform: capitalize;">{{ message.tags }}</strong></b> | {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <b><span aria-hidden="true">&times;</span></b>
+            </button>
+          </div>
+
+      {% endfor%}
+    {% endif %}
+
+
+
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h4 style="color:#E88D67; "><b>Shopping Cart</b></h4></div>
+                    <div class="col align-self-center text-right text-muted">{{ no_of_items }} items</div>
+                </div>
+            </div>    
+
+            {% for item in cart_items %}
+
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="{{ item.item.image.url }}"></div>
+                        <div class="col">
+                            <div class="row text-muted">{{ item.item.category }}</div>
+                            <div class="row">{{ item.item.food_name }}</div>
+                        </div>
+                        <div class="col">
+                            <b>₹{{ item.item.prize }}</b>
+                        </div>
+                        <div class="col">
+                            <a href="{% url "delete_from_cart" item.item.id %}">
+                                <button class="btn btn-warning" type="button">
+                                  <b>Delete</b>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            <div class="back-to-shop">
+                <a href="{% url "home_page" %}">
+                    <span class="text-muted">&leftarrow; Back to shop</span>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-md-4 summary">
+            <div><h5 style="color:#AF8F6F;"><b>Order Summary</b></h5></div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">ITEMS ← {{ no_of_items }}</div>
+                <div class="col text-right">₹{{ prize }}</div>
+            </div>
+
+            <form method="post" action="/cart/">
+                {% csrf_token %}
+
+                <p>SHIPPING</p>
+                <select name="delivery-category" id="select">
+                    <option class="text-muted" id="option1">Standard-Delivery-  Rs.100.00</option>
+                    <option class="text-muted" id="option2">Express-Delivery-  Rs.250.00</option>
+                </select>
+
+                <p>GIVE CODE</p>
+                <input id="code" name="coupon-code" placeholder="Enter your code">
+
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right" id="total_price">
+                    ₹{{ updated_prize }}
+                </div>
+            </div>
+            <button class="btn" type="submit">CHECKOUT</button>
+
+        </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const option1Field = document.querySelector('#option1');
+
+    option1Field.addEventListener('click', (event) => {
+        console.log("Option 1");
+        document.getElementById("total_price").value = 1000;
+    });
+
+</script>
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/aos.js' %}"></script>
+<script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+<script src="{% static 'js/scrollax.min.js' %}"></script>
+<script src="{% static 'js/google-map.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
